@@ -1,10 +1,13 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+
 
 <!--
 `ft-confirmation-dialog`
-An element that provides a configurable confirmation dialog.
+A configurable confirmation dialog that returns a Promise when posed.
 
 @demo demo/index.html
 -->
@@ -12,12 +15,28 @@ An element that provides a configurable confirmation dialog.
 <dom-module id="ft-confirmation-dialog">
 
     <style include="iron-flex iron-flex-alignment"></style>
-
+    
     <template>
 
-        <div>
-            ft-confirmation-dialog
-        </div>
+        <paper-dialog modal id="dialog"
+                      style="width:500px;">
+
+            <!-- Prompt -->
+            <div id="prompt" style="font-size:14pt">[[prompt]]</div>
+
+            <!-- Buttons -->
+            <div class="layout horizontal end-justified">
+
+                <!-- Cancel -->
+                <paper-button dialog-dismiss raised>[[cancelButtonLabel]]</paper-button>
+
+                <div style="width:20px"></div>
+
+                <!-- Okay -->
+                <paper-button dialog-confirm raised autofocus>[[commitButtonLabel]]</paper-button>
+            </div>
+
+        </paper-dialog>
 
     </template>
 
@@ -27,6 +46,56 @@ An element that provides a configurable confirmation dialog.
             is: 'ft-confirmation-dialog',
 
             properties: {
+                
+                /** The question to pose to the user. */
+                prompt: {
+                    type: String,
+                    notify: true,
+                    value: "Are you sure you want to do this?"
+                },
+                
+                /** Label of the commit button. */
+                commitButtonLabel: {
+                    type: String,
+                    notify: true,
+                    value: "Okay"
+                },
+                
+                /** Label of the cancel button. */
+                cancelButtonLabel: {
+                    type: String,
+                    notify: true,
+                    value: "Cancel"
+                }
+            },
+
+            pose: function(prompt, commitButtonLabel, cancelButtonLabel)
+            {
+                if (prompt)
+                    this.prompt = prompt;
+                if (commitButtonLabel)
+                    this.commitButtonLabel = commitButtonLabel;
+                if (cancelButtonLabel)
+                    this.cancelButtonLabel = cancelButtonLabel;
+
+                return new Promise(function(resolve, reject)
+                {
+                    this.$.dialog.open();
+
+                    this.$.dialog.addEventListener("iron-overlay-closed", function doneListener(event)
+                    {
+                        this.$.dialog.removeEventListener("iron-overlay-closed", doneListener);
+
+                        var choice;
+                        const closingReason = event.detail;
+                        if (closingReason.confirmed)
+                            choice = "commit";
+                        else
+                            choice = "cancel";
+
+                        resolve(choice);
+                    }.bind(this))
+                }.bind(this))
             }
 
         });

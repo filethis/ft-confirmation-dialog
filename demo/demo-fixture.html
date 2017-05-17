@@ -2,6 +2,7 @@
 
 <!-- Imports -->
 <link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../paper-button/paper-button.html">
 
 <link rel="import" href="../ft-confirmation-dialog.html">
 
@@ -18,7 +19,12 @@ An element that provides a configurable confirmation dialog.
 
     <template>
 
-        <ft-confirmation-dialog></ft-confirmation-dialog>
+        <div class="layout vertical center">
+            <ft-confirmation-dialog id="dialog"></ft-confirmation-dialog>
+
+            <paper-button raised on-click="_pose">Pose</paper-button>
+        </div>
+
 
     </template>
 
@@ -28,10 +34,10 @@ An element that provides a configurable confirmation dialog.
         ({
             is: 'demo-fixture',
 
-            properties:
+            _pose: function()
             {
+                this.$.dialog.pose();
             }
-
         });
 
     </script>
