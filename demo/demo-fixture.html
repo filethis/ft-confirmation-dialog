@@ -20,9 +20,22 @@ An element that provides a configurable confirmation dialog.
     <template>
 
         <div class="layout vertical center">
+
             <ft-confirmation-dialog id="dialog"></ft-confirmation-dialog>
 
-            <paper-button raised on-click="_pose">Pose</paper-button>
+            <!-- Alert button -->
+            <paper-button raised on-click="_alert">Alert</paper-button>
+
+            <div style="height:20px"></div>
+
+            <!-- Confirm button -->
+            <paper-button raised on-click="_confirm">Confirm</paper-button>
+
+            <div style="height:20px"></div>
+
+            <!-- Fancy button -->
+            <paper-button raised on-click="_fancy">Fancy</paper-button>
+
         </div>
 
 
@@ -34,9 +47,20 @@ An element that provides a configurable confirmation dialog.
         ({
             is: 'demo-fixture',
 
-            _pose: function()
+            _alert: function()
             {
-                this.$.dialog.pose();
+                this.$.dialog.alert("You are a wonderful human being.");
+            },
+
+            _confirm: function()
+            {
+                this.$.dialog.confirm("Do you want to frobnicate the discombobulator?");
+            },
+
+            // NOTE: Image used here is in the public domain: https://pixabay.com/en/wow-bang-explosion-pow-blast-155268/
+            _fancy: function()
+            {
+                this.$.dialog.alert("You can use _Markdown_ in your dialogs.<br><br>![Amazing!](wow.png)<br><br>That's just __great__!");
             }
         });
 
