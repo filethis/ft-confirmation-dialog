@@ -2,6 +2,8 @@
 
 <!-- Imports -->
 <link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../iron-flex-layout/iron-flex-layout-classes.html">
+
 <link rel="import" href="../../paper-button/paper-button.html">
 
 <link rel="import" href="../ft-confirmation-dialog.html">
@@ -15,7 +17,7 @@ An element that provides a configurable confirmation dialog.
  -->
 <dom-module id="demo-fixture">
 
-    <style include="iron-flex iron-flex-alignment"></style>
+    <style include="iron-flex iron-flex-alignment iron-positioning"></style>
 
     <template>
 
@@ -60,7 +62,8 @@ An element that provides a configurable confirmation dialog.
             // NOTE: Image used here is in the public domain: https://pixabay.com/en/wow-bang-explosion-pow-blast-155268/
             _fancy: function()
             {
-                this.$.dialog.alert("You can use _Markdown_ in your dialogs.<br><br>![Amazing!](wow.png)<br><br>That's just __great__!");
+                this.$.dialog.alert("You can use _Markdown_ in your dialogs.<br><br>![Amazing!](wow.png)<br><br>```wow() { return \"That is fantastic!\"; " +
+                    "}```<br><br>That's just __great__!");
             }
         });
 

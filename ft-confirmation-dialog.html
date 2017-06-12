@@ -5,6 +5,8 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../marked-element/marked-element.html">
 
+<link rel="import" href="../ft-scrolling-behavior/ft-scrolling-behavior.html">
+
 
 <!--
 `ft-confirmation-dialog`
@@ -15,7 +17,7 @@ A configurable confirmation dialog that returns a Promise when posed.
 
 <dom-module id="ft-confirmation-dialog">
 
-    <style include="iron-flex iron-flex-alignment"></style>
+    <style include="iron-flex iron-flex-alignment iron-positioning"></style>
     
     <template>
 
@@ -23,12 +25,20 @@ A configurable confirmation dialog that returns a Promise when posed.
                       style="width:500px;">
 
             <!-- Prompt -->
-            <marked-element id="prompt" markdown="[[_prompt]]">
-                <div class="markdown-html"></div>
-            </marked-element>
+            <div
+                    id="promptScroller"
+                    style="overflow:auto;">
+                <marked-element
+                        id="prompt"
+                        markdown="[[_prompt]]">
+                    <div class="markdown-html"></div>
+                </marked-element>
+            </div>
 
             <!-- Buttons -->
-            <div class="layout horizontal end-justified">
+            <div
+                    id="buttons"
+                    class="layout horizontal end-justified">
 
                 <!-- Cancel -->
                 <paper-button
@@ -53,6 +63,10 @@ A configurable confirmation dialog that returns a Promise when posed.
 
             is: 'ft-confirmation-dialog',
 
+            behaviors: [
+                FtScrollingBehavior
+            ],
+
             properties: {
                 
                 _prompt: {
@@ -68,6 +82,22 @@ A configurable confirmation dialog that returns a Promise when posed.
                     type: String,
                     value: "Cancel"
                 }
+            },
+
+            ready: function()
+            {
+                this._manageScroller(this.$.promptScroller)
+            },
+
+            _calculateScrollerWidth: function(scroller)
+            {
+                return this.clientWidth;
+            },
+
+            _calculateScrollerHeight: function(scroller)
+            {
+                const buttonsHeight = this.$.buttons.offsetHeight;
+                return this.clientHeight - buttonsHeight;
             },
 
             alert: function(prompt, commitButtonLabel)
@@ -129,6 +159,63 @@ A configurable confirmation dialog that returns a Promise when posed.
                         resolve(choice);
                     }.bind(this))
                 }.bind(this))
+            },
+
+            _onWheel: function(event)
+            {
+                // If vertical scroll
+                const deltaY = event.deltaY;
+                const vertical = (deltaY !== 0);
+                if (vertical)
+                {
+                    const up = (deltaY < 0);
+                    if (up)
+                    {
+                        const viewportTop = this.scrollTop;
+                        const alreadyAtTop = (viewportTop === 0);
+                        if (alreadyAtTop)
+                            event.preventDefault();
+                        return;
+                    }
+
+                    const down = (deltaY > 0);
+                    if (down)
+                    {
+                        const viewportBottom = this.scrollTop + this.offsetHeight;
+                        const alreadyAtBottom = (viewportBottom >= this.scrollHeight);
+                        if (alreadyAtBottom)
+                            event.preventDefault();
+                        return;
+                    }
+                    return;
+                }
+
+                // If horizontal scroll
+                const deltaX = event.deltaX;
+                const horizontal = (deltaX !== 0);
+                if (horizontal)
+                {
+                    const left = (deltaX < 0);
+                    if (left)
+                    {
+                        const viewportLeft = this.scrollLeft;
+                        const alreadyAtLeft = (viewportLeft === 0);
+                        if (alreadyAtLeft)
+                            event.preventDefault();
+                        return;
+                    }
+
+                    const right = (deltaX > 0);
+                    if (right)
+                    {
+                        const viewportRight = this.scrollLeft + this.offsetWidth;
+                        const alreadyAtRight = (viewportRight >= this.scrollWidth);
+                        if (alreadyAtRight)
+                            event.preventDefault();
+                        return;
+                    }
+                    return;
+                }
             }
 
         });
