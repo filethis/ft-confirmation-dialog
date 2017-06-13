@@ -64,6 +64,7 @@ A configurable confirmation dialog that returns a Promise when posed.
             is: 'ft-confirmation-dialog',
 
             behaviors: [
+                Polymer.IronResizableBehavior,
                 FtScrollingBehavior
             ],
 
@@ -154,63 +155,6 @@ A configurable confirmation dialog that returns a Promise when posed.
                         resolve(choice);
                     }.bind(this))
                 }.bind(this))
-            },
-
-            _onWheel: function(event)
-            {
-                // If vertical scroll
-                const deltaY = event.deltaY;
-                const vertical = (deltaY !== 0);
-                if (vertical)
-                {
-                    const up = (deltaY < 0);
-                    if (up)
-                    {
-                        const viewportTop = this.scrollTop;
-                        const alreadyAtTop = (viewportTop === 0);
-                        if (alreadyAtTop)
-                            event.preventDefault();
-                        return;
-                    }
-
-                    const down = (deltaY > 0);
-                    if (down)
-                    {
-                        const viewportBottom = this.scrollTop + this.offsetHeight;
-                        const alreadyAtBottom = (viewportBottom >= this.scrollHeight);
-                        if (alreadyAtBottom)
-                            event.preventDefault();
-                        return;
-                    }
-                    return;
-                }
-
-                // If horizontal scroll
-                const deltaX = event.deltaX;
-                const horizontal = (deltaX !== 0);
-                if (horizontal)
-                {
-                    const left = (deltaX < 0);
-                    if (left)
-                    {
-                        const viewportLeft = this.scrollLeft;
-                        const alreadyAtLeft = (viewportLeft === 0);
-                        if (alreadyAtLeft)
-                            event.preventDefault();
-                        return;
-                    }
-
-                    const right = (deltaX > 0);
-                    if (right)
-                    {
-                        const viewportRight = this.scrollLeft + this.offsetWidth;
-                        const alreadyAtRight = (viewportRight >= this.scrollWidth);
-                        if (alreadyAtRight)
-                            event.preventDefault();
-                        return;
-                    }
-                    return;
-                }
             }
 
         });
