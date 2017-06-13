@@ -141,19 +141,21 @@ A configurable confirmation dialog that returns a Promise when posed.
                 {
                     this.$.dialog.open();
 
-                    this.$.dialog.addEventListener("iron-overlay-closed", function doneListener(event)
-                    {
-                        this.$.dialog.removeEventListener("iron-overlay-closed", doneListener);
+                    this.doneListener = function doneListener(event)
+                        {
+                            this.$.dialog.removeEventListener("iron-overlay-closed", this.doneListener);
 
-                        var choice;
-                        const closingReason = event.detail;
-                        if (closingReason.canceled || !closingReason.confirmed)  // Huh?
-                            choice = "cancel";
-                        else
-                            choice = "commit";
+                            var choice;
+                            const closingReason = event.detail;
+                            if (closingReason.canceled || !closingReason.confirmed)  // Huh?
+                                choice = "cancel";
+                            else
+                                choice = "commit";
 
-                        resolve(choice);
-                    }.bind(this))
+                            resolve(choice);
+                        }.bind(this);
+
+                    this.$.dialog.addEventListener("iron-overlay-closed", this.doneListener)
                 }.bind(this))
             }
 
