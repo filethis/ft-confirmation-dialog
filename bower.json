@@ -5,7 +5,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.1",
     "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
-    "marked-element": "PolymerElements/marked-element#^2.1.1",
+    "marked-element": "PolymerElements/marked-element#^1.4.2",
     "ft-scrolling-behavior": "filethis/ft-scrolling-behavior#^0.0.1"
   },
   "devDependencies": {
@@ -13,5 +13,9 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.1",
+    "webcomponentsjs": "^v1.0.0"
   }
 }
