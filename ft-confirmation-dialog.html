@@ -98,7 +98,7 @@ A configurable confirmation dialog that returns a Promise when posed.
 
             _calculateScrollerHeight: function(scroller)
             {
-                const buttonsHeight = this.$.buttons.offsetHeight;
+                var buttonsHeight = this.$.buttons.offsetHeight;
                 return this.clientHeight - buttonsHeight;
             },
 
@@ -152,7 +152,7 @@ A configurable confirmation dialog that returns a Promise when posed.
                             this.$.dialog.removeEventListener("iron-overlay-closed", this.doneListener);
 
                             var choice;
-                            const closingReason = event.detail;
+                            var closingReason = event.detail;
                             if (closingReason.canceled || !closingReason.confirmed)  // Huh?
                                 choice = "cancel";
                             else
