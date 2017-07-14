@@ -1,6 +1,6 @@
 # Project configuration
 NAME=ft-confirmation-dialog
-VERSION=0.0.9
+VERSION=0.0.10
 LOCAL_PORT=3646
 GITHUB_USER=filethis
 
