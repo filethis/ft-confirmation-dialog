@@ -4,9 +4,9 @@
 
 -----------------------------------------------------------
 
-An element that provides a configurable alert or confirmation dialog.
+An element that provides a configurable alert or confirmation dialog that returns a Promise when invoked.
 
-Unlike the browser's built-in _alert()_ function, which is synchronous and blocks execution, this element has _alert()_ and _confirm()_ methods that are asynchronous. The _confirm()_ method returns a Promise instance when invoked.
+Unlike the browser's built-in _alert()_ function, which is synchronous and blocks execution, this element has _alert()_ and _confirm()_ methods that are asynchronous. The _confirm()_ method returns a Promise instance when invoked. The Promise resolves to to a string that is either "cancel" or "commit". 
 
 When you've defined an element in your scope:
 
