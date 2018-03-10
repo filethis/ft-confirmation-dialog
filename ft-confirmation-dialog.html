@@ -39,35 +39,50 @@ An element that provides a configurable alert or confirmation dialog that return
             :host {
                 display:block;
                 overflow:hidden;
+                --paper-dialog-background-color: #FAFAFA;
                 @apply --ft-confirmation-dialog;
             }
         </style>
 
         <paper-dialog
-                modal id="dialog"
-                style="width:500px;">
-
+            modal id="dialog"
+            class="layout vertical"
+            style="
+                width:500px;
+                overflow:hidden;
+                padding-left:20px;
+                padding-right:20px;
+            "
+        >
             <!-- Prompt -->
             <div
-                    id="promptScroller"
-                    style="overflow:auto;">
+                id="promptScroller"
+                style="
+                    overflow:auto;
+                    max-height:300px;
+                    background-color:white;
+                    border:1px solid #DDD;
+                "
+            >
                 <marked-element
-                        id="prompt"
-                        markdown="[[_prompt]]">
+                    id="prompt"
+                    markdown="[[_prompt]]"
+                >
                     <div class="markdown-html"></div>
                 </marked-element>
             </div>
 
             <!-- Buttons -->
             <div
-                    id="buttons"
-                    class="layout horizontal end-justified">
-
+                id="buttons"
+                class="layout horizontal end-justified"
+            >
                 <!-- Cancel -->
                 <paper-button
-                        id="cancelButton"
-                        dialog-dismiss
-                        raised>
+                    id="cancelButton"
+                    dialog-dismiss
+                    raised
+                >
                     [[_cancelButtonLabel]]
                 </paper-button>
 
@@ -88,7 +103,6 @@ An element that provides a configurable alert or confirmation dialog that return
 
             behaviors: [
                 Polymer.IronResizableBehavior,
-                FileThis.ScrollingBehavior
             ],
 
             properties: {
@@ -109,17 +123,6 @@ An element that provides a configurable alert or confirmation dialog that return
                     type: String,
                     value: "Cancel"
                 }
-            },
-
-            ready: function()
-            {
-                this._manageScroller(this.$.promptScroller)
-            },
-
-            _calculateScrollerHeight: function(scroller)
-            {
-                var buttonsHeight = this.$.buttons.offsetHeight;
-                return this.clientHeight - buttonsHeight;
             },
 
             /**
