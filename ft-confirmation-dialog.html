@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<link rel="import" href="../ft-scrolling-behavior/ft-scrolling-behavior.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../paper-button/paper-button.html">
@@ -37,8 +36,8 @@ An element that provides a configurable alert or confirmation dialog that return
 
         <style>
             :host {
-                display:block;
-                overflow:hidden;
+                display: block;
+                overflow: hidden;
                 --paper-dialog-background-color: #FAFAFA;
                 @apply --ft-confirmation-dialog;
             }
@@ -48,20 +47,20 @@ An element that provides a configurable alert or confirmation dialog that return
             modal id="dialog"
             class="layout vertical"
             style="
-                width:500px;
-                overflow:hidden;
-                padding-left:20px;
-                padding-right:20px;
+                width: 500px;
+                overflow: hidden;
+                padding-left: 20px;
+                padding-right: 20px;
             "
         >
             <!-- Prompt -->
             <div
                 id="promptScroller"
                 style="
-                    overflow:auto;
+                    overflow: auto;
                     max-height:300px;
-                    background-color:white;
-                    border:1px solid #DDD;
+                    background-color: white;
+                    border: 1px solid #DDD;
                 "
             >
                 <marked-element
