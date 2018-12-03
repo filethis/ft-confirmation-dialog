@@ -3,7 +3,7 @@
   "description": "An element that provides a configurable confirmation dialog.",
   "main": "ft-confirmation-dialog.html",
   "dependencies": {
-    "ft-element-demo": "filethis/ft-element-demo#^1.0.14",
+    "ft-element-demo": "filethis/ft-element-demo#^1.0.15",
     "marked-element": "PolymerElements/marked-element#2.4.0",
     "paper-dialog": "PolymerElements/paper-dialog#2.1.1",
     "polymer": "Polymer/polymer#^2.7.0"
