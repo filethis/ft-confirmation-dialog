@@ -1,7 +1,7 @@
 {
   "description": "An element that provides a configurable confirmation dialog.",
   "name": "@filethis/ft-confirmation-dialog",
-  "version": "1.0.24",
+  "version": "3.0.0",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",
