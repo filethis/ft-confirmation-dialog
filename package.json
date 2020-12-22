@@ -1,6 +1,6 @@
 {
   "description": "An element that provides a configurable confirmation dialog.",
-  "name": "ft-confirmation-dialog",
+  "name": "@filethis/ft-confirmation-dialog",
   "version": "1.0.24",
   "resolutions": {
     "inherits": "2.0.3",
@@ -15,7 +15,6 @@
     "*.make",
     "*.png",
     "*.svg",
-    ".yalc/",
     "data/",
     "demo/",
     "test/",
