@@ -27,7 +27,6 @@ An element that provides a configurable alert or confirmation dialog that return
 */
 import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
 
-import '@polymer/marked-element/marked-element.js';
 import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/polymer/polymer-legacy.js';
@@ -61,9 +60,7 @@ Polymer({
                     background-color: white;
                     border: 1px solid #DDD;
                 ">
-                <marked-element id="prompt" markdown="[[_prompt]]">
-                    <div class="markdown-html"></div>
-                </marked-element>
+                <div>[[_prompt]]</div>
             </div>
 
             <!-- Buttons -->
